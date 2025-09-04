@@ -31,13 +31,20 @@ function ContactProfile() {
         }
     }
 
+  const formatLabel = (label) => {
+    return (label[0].toUpperCase() + label.slice(1))
+        .replace(/([A-Z])/g, " $1")
+  }
+
   return (
     <div>
-        <h3>Contact profile</h3>
+        <h3 style={{ marginLeft: 10}}>Contact profile</h3>
         <div className='contact-info'>
-            <strong>Name:</strong> {contact.firstName} {contact.lastName} <br />
-            <strong>Street:</strong> {contact.street} <br />
-            <strong>City:</strong> {contact.city}
+            {Object.entries(contact).map(([key, value]) => (
+                <div key={key} style={{ marginBottom: "0.25rem" }}>
+                    <strong>{formatLabel(key)}:</strong> {String(value)}
+                </div>
+            ))}
         </div>
         <button 
             onClick={handleDelete}

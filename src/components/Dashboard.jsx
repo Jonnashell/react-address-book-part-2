@@ -34,17 +34,31 @@ function Dashboard() {
                 maxWidth: "300px",
                 }}
             />
-            <div style={{ display: "grid", gap: "0.5rem"  }}>
+            <div style={{
+                display: "grid",
+                gap: "0.5rem",
+                gridTemplateColumns: "repeat(3, 1fr)",
+                maxWidth: "80%" }}>
                 {filteredContacts.map((c) => {
                     return (
-                        <li
+                        <div
                             key={c.id}
                             onClick={() => navigate(`/contact/${c.id}`)}
-                            style={{ cursor: "pointer" }}
+                            style={{
+                                maxWidth: "350px",
+                                padding: "0.3rem 0.4rem",
+                                border: "1px solid #ddd",
+                                borderRadius: "8px",
+                                backgroundColor: "#f9f9f9",
+                                cursor: "pointer",
+                                transition: "background 0.2s",
+                            }}
+                            onMouseEnter={(e) => (e.currentTarget.style.background = "#e6f0ff")}
+                            onMouseLeave={(e) => (e.currentTarget.style.background = "#f9f9f9")}
                         >
-                            {`${c.firstName} ${c.lastName}`}
-                        </li>
-                        
+                            <strong>{c.firstName} {c.lastName}</strong><br />
+                            <span style={{ color: "#555", fontSize: "0.9rem" }}>{c.city}</span>
+                        </div>
                     )
                 })}
             </div>
